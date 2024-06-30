@@ -1,0 +1,45 @@
+<div *ngIf="loading; else showHotels" class="center">
+    <div class="loading-contianer">
+        <triprice-plane-loading></triprice-plane-loading>
+      </div>
+</div>
+<ng-template #showHotels>
+
+
+    <div class="back-button-location" class>
+        <button type="button" class="back-button" (click)="backClicked()"><mat-icon>undo</mat-icon>Back</button>
+    </div>
+
+
+    <div style="display: flex;
+        justify-content: center">
+        <h2 *ngIf="currentDest">{{currentDest}}</h2>
+    </div>
+
+
+
+    <div class="filters">
+        <mat-card class="direct">
+            <mat-card-content>
+                <section class="example-section">
+                    <div class="max-price-container">
+                        <label id="example-name-label" class="example-name-label">Max price</label>
+                        <label class="example-value-label">{{maxPrice}}</label>
+                        <mat-slider min="0" max="20000" step="50" showTickMarks discrete>
+                            <input matSliderThumb [(ngModel)]="maxPrice" (ngModelChange)="filterHotelsByPrice()">
+                        </mat-slider>
+                    </div>
+                </section>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngFor="let hotel of filteredHotels">
+
+        <div *ngIf="hotel" class="mt5">
+            <triprice-hotel-card (nextPage)='goNextPage()' [tripId]="tripId" [hotel]="hotel"
+                [isOrderSummary]="false"></triprice-hotel-card>
+        </div>
+    </div>
+
+</ng-template>

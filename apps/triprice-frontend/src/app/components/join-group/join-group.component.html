@@ -1,0 +1,8 @@
+<ng-container *ngIf="!loading; else loading_users" class="container">
+
+</ng-container>  
+<ng-template #loading_users>
+    <div class="loading-contianer">
+        <triprice-plane-loading></triprice-plane-loading>
+    </div>
+</ng-template>

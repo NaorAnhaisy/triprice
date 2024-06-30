@@ -1,0 +1,40 @@
+table {
+  width: 100%;
+
+  tr:last-child {
+      background: #34537f54;
+  }
+}
+
+.warn {
+  color: red !important;
+}
+
+th {
+  background: #00bddd !important;
+}
+
+.mdc-data-table__cell {
+  font-size: 12px !important;
+}
+
+.mdc-data-table__header-cell {
+  font-size: 12px !important;
+}
+
+.text-header {
+  font-size: 22px;
+  color: #080707;
+  text-align: center;
+  font-weight: 900;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.text-sub-header {
+  font-size: 16px;
+  color: #080707;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 20px;
+}

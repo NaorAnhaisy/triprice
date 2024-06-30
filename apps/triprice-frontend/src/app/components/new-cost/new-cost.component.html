@@ -1,0 +1,38 @@
+<div mat-dialog-content>
+    <form [formGroup]="costForm">
+        <mat-form-field class="form-field inputs" appearance="fill">
+        <mat-label>who paid?</mat-label>
+        <mat-select formControlName="user" matInput>
+            <mat-option *ngFor="let user of users" [value]="user">{{user.first_name + " " + user.last_name}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <div></div>
+
+        <mat-form-field class="form-field inputs" appearance="fill">
+        <mat-label>cost</mat-label>
+        <input formControlName="cost" type="number" matInput>
+        </mat-form-field>
+
+        <div></div>
+
+        <mat-form-field class="form-field inputs" appearance="fill">
+            <mat-label>category</mat-label>
+            <mat-select formControlName="category" matInput>
+                <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div></div>
+
+        <mat-form-field class="form-field inputs" appearance="fill">
+            <mat-label>description</mat-label>
+            <input formControlName="description" type="text"  matInput>
+
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button  [disabled]="loading" mat-raised-button color="primary" (click)="addCost()">add</button>
+  </div>

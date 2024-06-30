@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Nest.js",
+        "type": "node",
+        "request": "launch",
+        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+        "args": ["${workspaceFolder}/apps/triprice-backend/src/main.ts"],
+        "cwd": "${workspaceFolder}",
+        "protocol": "inspector",
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "sourceMaps": true,
+        "outFiles": ["${workspaceFolder}/dist/apps/api/main.js"]
+      }
+    ]
+  }
+  

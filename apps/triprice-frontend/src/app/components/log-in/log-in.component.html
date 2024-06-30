@@ -1,0 +1,88 @@
+﻿<div class="container">
+  <div class="header">
+    <img class="img" src="../../../assets/images/login-plane.png" />
+    <img class="logo" src="../../../assets/logo.PNG" />
+  </div>
+  <div class="form-container">
+    <form
+      [autocomplete]="false"
+      class="form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="input-container">
+        <span class="label">Email</span>
+        <div class="input-field">
+          <input
+            formControlName="email"
+            id="email"
+            placeholder="Enter your Email"
+          />
+          <mat-icon class="input-icon">alternate_email</mat-icon>
+        </div>
+      </div>
+      <div class="input-container">
+        <span class="label">Password</span>
+        <div class="input-field">
+          <input
+            formControlName="password"
+            type="password"
+            id="password"
+            placeholder="Enter your Password"
+          />
+          <mat-icon class="input-icon">key</mat-icon>
+        </div>
+        <span class="forgot-password" (click)="navigateToForgotPassword()"
+          >Forgot Password?</span
+        >
+      </div>
+      <div class="submit-container">
+        <button
+          class="sign-in-button"
+          style="direction: rtl"
+          [disabled]="loading || loginForm.invalid"
+          mat-raised-button
+          color="primary"
+        >
+          Sign in
+          <mat-icon
+            style="margin-inline-start: 10px; padding-bottom: 3px"
+            *ngIf="loading"
+            ><mat-spinner color="accent" diameter="20"></mat-spinner
+          ></mat-icon>
+        </button>
+        <a mat-raised-button routerLink="/register" class="btn btn-link"
+          >Sign up</a
+        >
+      </div>
+      <span class="error-alert" *ngIf="errorAlert"
+        >The email or password you entered is incorrect</span
+      >
+    </form>
+    <div class="other-options">
+      <span class="or-span">-OR-</span>
+      <button
+        mat-stroked-button
+        (click)="loginWithGoogle()"
+        class="btn btn-link sign-in-with-google-button"
+      >
+        <img src="../../../assets/images/google_logo.svg" />
+        Sign in with Google
+      </button>
+
+      <!-- <div class="whatsapp-contact">
+        <h4>Contact us</h4>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://wa.me/+972525381648?text=Hi! I need help with TriPrice app."
+        >
+          <img
+            class="whatsapp-logo"
+            src="../../../assets/images/whatsapp_logo.svg"
+          />
+        </a>
+      </div> -->
+    </div>
+  </div>
+</div>

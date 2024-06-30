@@ -1,0 +1,37 @@
+<div class="columnBox center">
+  <mat-card class="flightCard">
+    <mat-card-content>
+      <div class="container">
+
+        <div class="columnBox center">
+          <triprice-flight-details *ngFor="let flightDetail of flight.flightsDetailsToDestination"
+            [flight]="flightDetail"></triprice-flight-details>
+          <div style="width: 100%" *ngIf="flight.flightsDetailsToSource">
+            <hr class="separate-line-width">
+            <triprice-flight-details *ngFor="let flightDetail of flight.flightsDetailsToSource" [flight]="flightDetail"
+              [return]="true"></triprice-flight-details>
+          </div>
+        </div>
+        <div class="verticalLine"></div>
+
+        <div class="columnBox center">
+          <span *ngIf="!isOrdered" class="rtl lastSeats"> {{ flight.numberOfBookableSeats }} seats available </span>
+          <span *ngIf="!isOrdered" class="font20 bold">{{ flight.price.totalPrice | currency: flight.price.currency
+            }}</span>
+
+          <div *ngIf="!isOrderSummary">
+            <button type="button" class="selectButton mt15" (click)="goToHotelOptions(flight)">Select&nbsp;<span
+                style="line-height: 1.125rem; display: inline-block; margin-top: 0.1875rem; vertical-align: top;"><svg
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
+                  class="BpkIcon_bpk-icon--rtl-support__ZjVhM" fill="white" style="width: 1.125rem; height: 1.125rem;">
+                  <path
+                    d="M3 12a1.5 1.5 0 0 0 1.5 1.5h11.379l-4.94 4.94a1.5 1.5 0 0 0 2.122 2.12l7.5-7.5a1.5 1.5 0 0 0 0-2.12l-7.5-7.5a1.5 1.5 0 0 0-2.122 2.12l4.94 4.94H4.5A1.5 1.5 0 0 0 3 12z"
+                    clip-rule="evenodd"></path>
+                </svg></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

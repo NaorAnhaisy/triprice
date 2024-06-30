@@ -1,0 +1,85 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.flightSymbol {
+  position: relative;
+  display: block;
+  height: 0.125rem;
+  margin: 0.375rem auto;
+  padding: 0;
+  border-radius: 0.5rem;
+  background-color: #68697f;
+  line-height: 0;
+  text-align: center;
+}
+
+.planeIcon {
+  position: absolute;
+  top: 50%;
+  right: -0.375rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;
+  padding-left: 0.25rem;
+  margin-left: 3px;
+}
+
+.seperateLine {
+  max-width: 18%;
+  padding: 0 0.375rem;
+  flex: 0 1 36%;
+}
+
+.middleContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mat-mdc-card-content:first-child {
+  padding-top: 0;
+}
+
+.font20 {
+  font-size: 20px;
+}
+
+.columnBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.hour {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 2px;
+  color: #3a3a3a;
+}
+
+.date {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 4px;
+  color: #434141;
+}
+
+.airportName {
+  font-size: 14px;
+  color: #656565;
+}
+
+.margin1 {
+  margin: 1px;
+}
+
+.innerPadding {
+  padding: 1% 0%;
+}
+
+.return-flight {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,19 @@
+<div class="back-button-location">
+    <button type="button" class="back-button" (click)="backClicked()"><mat-icon>undo</mat-icon>Back</button>
+</div>
+<h1 class="center font30 bold blueText">Order Summary</h1>
+
+
+<triprice-trip-prices [calculatedPrices]="tripService.calculatedPrices$ | async"></triprice-trip-prices>
+<triprice-hotel-card *ngFor="let hotel of tripService.selectedHotels$" [hotel]="hotel"
+    [isOrderSummary]="true"></triprice-hotel-card>
+
+<triprice-flight-card *ngFor="let flight of tripService.selectedFlights$" [flight]="flight" [isOrderSummary]="true"
+    class="pb5"></triprice-flight-card>
+
+<!-- TODO CHANGE IT -->
+<triprice-price-card
+    [hotelprice]="getHotelPrice()"
+    [flightprice]="tripService.selectedFlights$[0].price.totalPrice"
+    [currency]="tripService.selectedFlights$[0].price.currency"
+    [adults]="tripService.selectedNumberOfTravelers$.value"></triprice-price-card>

@@ -1,0 +1,38 @@
+<ng-container *ngIf="!loading; else loading_trips"  class="center">
+  <h1 mat-dialog-title>MY GROUPS:</h1>
+  <div *ngIf="data" mat-dialog-content class="container">
+    <div *ngFor="let group of data">
+      <div class="center skin4">
+      <a class="removeButton" (click)="removeGroup(group.id)" mat-mini-fab color="info">
+        <mat-icon>delete</mat-icon>
+      </a>
+      <a class="removeButton" (click)="editGroup(group)" mat-mini-fab color="info">
+        <mat-icon>edit</mat-icon>
+      </a>
+      <button (click)="onSelectGroup(group)" class="mt5">{{group.name}}</button>
+    </div>
+   
+    <div *ngIf="editId && editId === group.id" class="edit">
+      <mat-list role="list" *ngIf="editUsers$">
+        <div mat-list-item *ngFor="let user of editUsers$" class="editItem">
+          <a class="removeButton" (click)="removeUserFromGroup(user.id)" mat-mini-fab color="warn">
+          <mat-icon>close</mat-icon>
+          </a>{{ user.first_name }} {{ user.last_name }}</div>
+      </mat-list>
+       <div *ngIf="editUsers$.length === 0" class="black">No users accepted the invite yet</div>
+    </div>
+   
+     </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="create" (click)="createGroup()">+ new Group</button>
+    <button (click)="onDoneClick()">Done</button>
+  </div>
+</ng-container>
+
+<ng-template #loading_trips>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</ng-template>

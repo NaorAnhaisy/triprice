@@ -1,0 +1,50 @@
+<div
+  *ngIf="tripService.searchLoading$ | async"
+  class="spinner-container center"
+>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</div>
+
+<div
+  class="center no-results"
+  *ngIf="
+    (tripService.trips$ | async)?.flights?.length === 0 &&
+    (tripService.searchLoading$ | async) === false
+  "
+>
+  <div class="no-result-value">
+    <span>No results found</span>
+    <span>Please try again</span>
+    <img alt="no results" src="../../../assets/images/no_res.png" />
+  </div>
+
+  <div *ngIf="(tripService.searchLoading$ | async) === false">
+    <button
+      type="button"
+      class="select-button search-again-button"
+      (click)="returnToSearchPage()"
+    >
+      <mat-icon>youtube_searched_for</mat-icon>Search Again
+    </button>
+  </div>
+</div>
+
+<div class="center" *ngIf="(tripService.searchLoading$ | async) === false && (tripService.trips$ | async)?.flights?.length !== 0">
+  <button
+    type="button"
+    class="select-button search-again-button"
+    (click)="returnToSearchPage()"
+  >
+    <mat-icon>youtube_searched_for</mat-icon>Search Again
+  </button>
+</div>
+
+<triprice-flight-options></triprice-flight-options>
+
+<!-- <div *ngIf="trip.flight && trip.hotel || trip.flight">
+        <triprice-price-card [hotelprice]="trip.hotel?.offers[0].price.total"
+            [flightprice]="trip.flight.price.totalPrice" [currency]="trip.flight.price.currency"
+            [adults]="trip.hotel?.offers[0].guests.adults"></triprice-price-card>
+    </div> -->

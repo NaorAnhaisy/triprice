@@ -1,0 +1,51 @@
+<ng-container *ngIf="!loading; else load" class="container">
+  <div class="wrapper" *ngIf="!showPayments; else paymentsTable">
+    <div *ngIf="costsLoading">
+      <triprice-plane-loading></triprice-plane-loading>
+    </div>
+
+    <div class="text-header">Payments</div>
+    <div class="text-sub-header">Report your expenses for divide payments and tracking your expenses</div>
+
+    <div class="cost-container" *ngFor="let cost of costs">
+        <div class="field-container">
+          <div class="field-header">who paid?</div>
+          <div class="field-value">{{cost.user?.first_name + " " + cost.user?.last_name}}</div>
+        </div>
+
+        <div class="field-container">
+          <div class="field-header">cost</div>
+          <div class="field-value">{{cost.cost}}</div>
+        </div>
+
+        <div class="field-container">
+          <div class="field-header">category</div>
+          <div class="field-value">{{cost.category}}</div>
+        </div>
+
+        <div class="field-container">
+          <div class="field-header">description</div>
+          <div class="field-value">{{cost.description}}</div>
+        </div>
+    </div>
+    <div>
+      <a mat-raised-button (click)="addCost()" class="btn btn-link center addbtn">+ Add new payment</a>
+    </div>
+      <div class="center mt3">
+        <button type="button" class="selectButton center blue" type="submit" (click)="onSubmit()">Calculate</button>
+      </div>
+      <button class="back-button" mat-button mat-raised-button (click)="back()"><mat-icon>undo</mat-icon>Back</button>
+  </div>
+</ng-container>
+
+  
+<ng-template #paymentsTable>
+    <triprice-payments-result (backToPayments)="setOldParticipents($event)" class="payments-result center"
+      [dataSource]="paymentResult"></triprice-payments-result>
+  </ng-template>
+  
+<ng-template #load>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</ng-template>

@@ -1,0 +1,18 @@
+<h2 class="margin0">Add members to the trip!</h2>
+<mat-form-field class="mlr1">
+    <mat-label>users</mat-label>
+    <mat-select [formControl]="tripUsers" multiple>
+        <mat-select-trigger>
+            {{tripUsers.value?.[0]?.first_name || ''}}
+            <span *ngIf="(tripUsers.value?.length || 0) > 1" class="example-additional-selection">
+                (+{{(tripUsers.value?.length || 0) - 1}} {{tripUsers.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let user of usersInTrip[trip.id!]" [value]="user">{{user.first_name + " " +
+            user.last_name}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div class="user-btns">
+    <button mat-button type="button" class="selectButton center" (click)="addMembersToTrip(trip.id)">Add</button>
+</div>

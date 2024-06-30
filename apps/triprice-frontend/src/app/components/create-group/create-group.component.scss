@@ -1,0 +1,93 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.removeButton {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Muli:400,800&display=swap");
+
+.skin4 button {
+  border: 2px solid #239fb3;
+  color: #00c1e7;
+  background-color: #fcfcfc;
+  min-width: 140px;
+}
+
+.skin4 button:active {
+  border-color: #00c1e7;
+  color: #00c1e7;
+  background-color: #4a4a4a;
+  outline: 0;
+}
+
+* {
+  font-family: "Muli", sans-serif;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button {
+  outline: 0;
+}
+
+body {
+  background: #001519;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  justify-items: center;
+}
+
+.group-container {
+  height: 100px;
+  display: grid;
+  place-items: center;
+  justify-items: center;
+}
+
+.multi-button {
+  font-size: 0;
+}
+
+button {
+  font-weight: 800;
+  background: transparent;
+  min-width: 100px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  font-size: 15px;
+  display: inline-block;
+  padding: 10px 16px;
+  margin: 0 3px 0 0;
+  cursor: pointer;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+@media only screen and (max-width: 767px) {
+  button {
+    min-width: 80px;
+  }
+}
+
+.create {
+  color: #c52b6e;
+  border: 2px solid #c52b6e;
+}

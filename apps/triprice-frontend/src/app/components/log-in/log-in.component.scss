@@ -1,0 +1,207 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.error-alert {
+  color: red;
+}
+
+.input-icon {
+  padding-inline-end: 10px;
+  color: #ccc;
+}
+
+.other-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+
+  .or-span {
+    margin-bottom: 10px;
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+}
+
+.forgot-password {
+  display: flex;
+  align-self: flex-end;
+  color: white;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: antiquewhite;
+  }
+}
+
+.input-container {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  .label {
+    color: white;
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #444040;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .input-field {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+}
+
+.sign-in-with-google {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 40%;
+  max-width: 400px;
+  min-width: 250px;
+}
+
+.whatsapp-contact {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.whatsapp-logo {
+  width: 42px;
+  height: 42px;
+  margin-left: 4px;
+  margin-bottom: 10px;
+}
+
+.container {
+  display: flex;
+  overflow: auto;
+  flex-direction: column !important;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom, #248cff 0%, #a4c8ff00 100%);
+
+  .form-container {
+    border-radius: 25px 25px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .img {
+      width: 40%;
+    }
+
+    .logo {
+      width: 60%;
+      min-width: 200px;
+      max-width: 400px;
+      border: 1px solid aliceblue;
+      border-radius: 33px;
+      padding: 5px;
+    }
+  }
+
+  .title {
+    font-size: 28px;
+    padding-bottom: inherit;
+    font-weight: 600;
+    color: darkcyan;
+    font-family: system-ui;
+  }
+
+  .form-field {
+    width: 63%;
+  }
+
+  .submit-container {
+    display: flex;
+    width: 270px;
+    justify-content: center;
+    gap: 50px;
+    margin: 30px auto;
+
+    button,
+    a {
+      margin: 3px;
+    }
+  }
+}
+
+.sign-in-with-google-button {
+  height: auto;
+  padding: 8px 15px;
+  background-color: white;
+  color: black;
+
+  ::ng-deep {
+    .mdc-button__label {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+
+  img {
+    height: 24px;
+  }
+}

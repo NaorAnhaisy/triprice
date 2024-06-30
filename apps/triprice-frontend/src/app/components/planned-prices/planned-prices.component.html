@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="prices-container">
+        <div class="text-header">Plan your budget</div>
+        <div class="text-sub-header">Define the money you plan to spend by category</div>
+        <div class="planeed-price" *ngFor="let plannedPrice of plannedPrices">
+            <mat-icon>info</mat-icon>
+            <div class="price-description">{{plannedPrice.category}}: </div>
+            <input class="price-input"   type="number" [(ngModel)]="plannedPrice.price">
+        </div>
+        <div class="planeed-price" *ngFor="let plannedPrice of newPlannedPrices">
+            <mat-icon>info</mat-icon>
+            <div class="price-description">{{plannedPrice.category}}: </div>
+            <input class="price-input"   type="number" [(ngModel)]="plannedPrice.price">
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button  [disabled]="loading" mat-raised-button color="primary" (click)="save()">save</button>
+  </div>

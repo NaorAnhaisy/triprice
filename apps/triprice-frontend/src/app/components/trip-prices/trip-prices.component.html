@@ -1,0 +1,12 @@
+<div class="container">
+    <div *ngIf="calculatedPrices?.length" class="prices-container">
+        <div class="text-header">Information about the prices at the destination</div>
+        <div class="text-sub-header">the prices are calculated based on trips from the past</div>
+        <div class="calculated-price" *ngFor="let calculatedPrice of calculatedPrices">
+            <mat-icon>info</mat-icon>
+            <div class="price-description">average price for {{calculatedPrice.category}}: </div>
+            <span class="price-value">{{calculatedPrice.price.toFixed(2)}}€</span>
+            <div class="price-metadata"> (based on {{calculatedPrice.numberOfTrips}} trips) </div>
+        </div>
+    </div>
+</div>

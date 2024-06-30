@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Hi {{user?.first_name}}</h1>
+<h2 mat-dialog-title *ngIf="!!data.id">Update your review</h2>
+<div mat-dialog-content>
+  <form class="form" [formGroup]="reviewForm">
+
+    <mat-form-field  appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <div></div>
+
+    <mat-form-field  appearance="fill">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city_name">
+    </mat-form-field>
+
+    <div class="rating-container">
+      <mat-label>Rating of the trip</mat-label>
+      <star-rating [starType]="'svg'" [rating]="rating" (ratingChange)="onTripRatingChange($event)"></star-rating>
+    </div>
+
+    <div class="rating-container">
+      <mat-label>Rating for the price</mat-label>
+      <star-rating [starType]="'svg'" [rating]="priceRating" (ratingChange)="onPriceRatingChange($event)"></star-rating>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+  </form>
+</div>
+<div style="justify-content: end;" mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button *ngIf="!data.id" mat-button  [disabled]="loading" mat-raised-button color="primary" (click)="post()">Post</button>
+  <button *ngIf="!!data.id" mat-button  [disabled]="loading" mat-raised-button color="primary" (click)="update()">Update</button>
+</div>

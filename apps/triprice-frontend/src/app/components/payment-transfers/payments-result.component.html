@@ -1,0 +1,33 @@
+<ng-container *ngIf="!loading; else loading_users">
+    <div class="container">
+
+        <div class="text-header">Payments results</div>
+        <div class="text-sub-header">Summary of transfers following expenses</div>
+    
+        <mat-table class="payments-table" [dataSource]="computedDataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="summary">
+                <mat-header-cell *matHeaderCellDef class="center top-left-radius"> Transfer details </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="center bottom-left-radius"> {{ element.payFrom}} need to
+                    transfer to {{element.payTo}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <mat-header-cell *matHeaderCellDef class="center top-right-radius"> Amount </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="center bottom-right-radius">{{element.amount}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div><button mat-raised-button color="primary" class="back-button" (click)="backToPayments.emit()">
+            <mat-icon>undo</mat-icon>Back
+            </button></div>
+    </div>
+</ng-container>
+
+<ng-template #loading_users>
+    <div class="loading-contianer">
+        <triprice-plane-loading></triprice-plane-loading>
+    </div>
+</ng-template>

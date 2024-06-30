@@ -1,0 +1,116 @@
+<ng-container *ngIf="!loading; else load">
+  <div class="trip-block" *ngFor="let trip of tripsArray$; index as i ">
+    <div class="actions-buttons">
+      <button (click)="handleRemoveTrip(trip)" mat-mini-fab color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+    <mat-menu #menu="matMenu">
+      <button *ngIf="areThereHotels(trip)" (click)="handleEditHotel(trip)" mat-menu-item>
+        <mat-icon>bed</mat-icon>
+        <span>Edit hotel</span>
+      </button>
+      <button (click)="handleEditFlight(trip)" mat-menu-item>
+        <mat-icon>flight</mat-icon>
+        <span>Edit flight</span>
+      </button>
+    </mat-menu>
+    <triprice-trip-prices></triprice-trip-prices>
+    <triprice-flight-card *ngFor="let flight of trip.flights" [flight]="flight" [isOrderSummary]="true"
+      [isOrdered]="true"></triprice-flight-card>
+    <triprice-hotel-card *ngFor="let hotel of trip.hotels" [hotel]="hotel"
+      [isOrderSummary]="true"></triprice-hotel-card>
+    <triprice-price-card [hotelprice]="getHotelPrice(trip)" [flightprice]="getFlightPrice(trip)"
+      [currency]="getCurrency(trip)" [adults]="trip.numberOfTravelers" [isOrdered]="true"></triprice-price-card>
+
+    <button mat-raised-button color="primary" class='more-options' [matMenuTriggerFor]="moreOptions">Trip management</button>
+
+    <mat-menu #moreOptions="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="tripMembers">Trip Members</button>
+      <button mat-menu-item (click)="moveToPaymentPage(trip.id, trip.user_id)">Payments</button>
+      <button mat-menu-item (click)="moveToTrackingTripPage(trip.id)">Tracking</button>
+      <button mat-menu-item (click)="planBudget(trip.id, trip.plannedPrices ?? [])">Plan Budget</button>
+    </mat-menu>
+
+    <mat-menu #tripMembers="matMenu">
+      <button mat-menu-item (click)="openAddMembersDialog(trip)">Add Members</button>
+      <button mat-menu-item (click)="openRemoveMembersDialog(trip)">Remove Members</button>
+    </mat-menu>
+
+
+    <!-- <div class="center mt3">
+      <h2 class="margin0">Add members to the trip!</h2>
+      <mat-form-field class="mlr1">
+        <mat-label>users</mat-label>
+        <mat-select [formControl]="tripUsers" multiple>
+          <mat-select-trigger>
+            {{tripUsers.value?.[0]?.first_name || ''}}
+            <span *ngIf="(tripUsers.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(tripUsers.value?.length || 0) - 1}} {{tripUsers.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let user of usersInTrip[trip.id!]" [value]="user">{{user.first_name + " " +
+            user.last_name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="user-btns">
+        <button type="button" class="selectButton center" (click)="addMembersToTrip(trip.id)">Add</button>
+        <button type="button" class="selectButton editButton center" (click)="openMembersDialog(trip)">Edit
+          members</button>
+      </div>
+    </div>
+
+
+    <div class="center mt3">
+      <button type="button" class="selectButton center blue"
+        (click)="planBudget(trip.id, trip.plannedPrices ?? [])">Plan budget</button>
+    </div>
+  </div>
+
+  <div *ngIf="!tripsArray$ && sharedTrips$.length === 0" class="no-trips-div">
+    <img src="assets\images\no-trips.png" alt="no-trips">
+    <h1 class="noTrips">Looks like your trip list is empty...</h1>
+  </div>
+
+  <div class="trip-block" *ngFor="let trip of sharedTrips$; index as i ">
+    <h1 class="center">shared trip</h1>
+    <button (click)="handleRemoveSharedTrip(trip)" mat-mini-fab color="warn">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="handleEditHotel(trip)" mat-menu-item>
+        <mat-icon>bed</mat-icon>
+        <span>Edit hotel</span>
+      </button>
+      <button (click)="handleEditFlight(trip)" mat-menu-item>
+        <mat-icon>flight</mat-icon>
+        <span>Edit flight</span>
+      </button>
+    </mat-menu>
+    <triprice-flight-card *ngFor="let flight of trip.flights" [flight]="flight" [isOrderSummary]="true"
+      [isOrdered]="true"></triprice-flight-card>
+    <triprice-hotel-card *ngFor="let hotel of trip.hotels" [hotel]="hotel"
+      [isOrderSummary]="true"></triprice-hotel-card>
+    <triprice-price-card [hotelprice]="getHotelPrice(trip)"
+      [flightprice]="trip.flights[0].price.totalPrice" [currency]="trip.flights[0].price.currency"
+      [adults]="trip.numberOfTravelers" [isOrdered]="true"></triprice-price-card>
+
+    <div class="center mt3">
+      <button type="button" class="selectButton center blue" (click)="moveToPaymentPage(trip.id, trip.user_id)">Add new
+        payments!</button>
+    </div> -->
+  </div>
+</ng-container>
+
+<ng-template #load>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</ng-template>

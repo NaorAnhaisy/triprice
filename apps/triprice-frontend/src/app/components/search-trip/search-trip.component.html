@@ -1,0 +1,340 @@
+<ng-container *ngIf="!loading; else load" class="center">
+  <mat-card style="border-radius: 20px; width: 95%">
+    <mat-card-content class="card-content">
+      <form class="example-form">
+        <mat-radio-group
+          class="radio-group-selection"
+          name="radio-group"
+          aria-label="בחירת צורת חיפוש"
+          [(ngModel)]="chosenSearchType"
+        >
+          <div class="radio-group" style="margin-left: 5%">
+            <mat-radio-button [value]="searchTypes.SINGLE_DESTINATION" name="0"
+              >Round Trip</mat-radio-button
+            >
+            <mat-radio-button
+              [value]="searchTypes.MULTIPLE_DESTINATIONS"
+              name="1"
+              >Multiple Destinations</mat-radio-button
+            >
+            <mat-radio-button
+              [value]="searchTypes.COMBINE_DESTINATIONS"
+              name="2"
+            >
+              Multiple Cities</mat-radio-button
+            >
+          </div>
+        </mat-radio-group>
+
+        <div class="multicity-input">
+          <mat-form-field
+            class="form-field"
+            appearance="outline"
+            *ngIf="!isCombination()"
+          >
+            <mat-label>Origin</mat-label>
+            <input
+              #originInput
+              (input)="onInputChange($event)"
+              type="text"
+              placeholder="Full/Partial name"
+              value="TLV"
+              matInput
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let airport of airports$ | async"
+                [value]="airport.iata"
+              >
+                {{ airport.name }} ({{ airport.iata }})
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field
+            class="multi-dest-field form-field"
+            *ngIf="isMultiCity(); else single_destination"
+            appearance="outline"
+            [color]="color"
+          >
+            <mat-label>Destinations</mat-label>
+            <mat-chip-grid #chipGrid aria-label="destinations selection">
+              <mat-chip-row
+                *ngFor="let airportIATA of selectedAirports"
+                (removed)="remove(airportIATA)"
+              >
+                {{ airportIATA }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            </mat-chip-grid>
+            <input
+              #multipleAirportsInput
+              [disabled]="selectedAirports.length >= 3"
+              placeholder="Full/Partial name"
+              (input)="onInputChange($event)"
+              [matChipInputFor]="chipGrid"
+              [matAutocomplete]="auto"
+            />
+
+            <mat-autocomplete
+              autoActiveFirstOption
+              #auto="matAutocomplete"
+              (optionSelected)="add($event)"
+            >
+              <mat-option
+                *ngFor="let airport of airports$ | async"
+                [value]="airport.iata"
+              >
+                {{ airport.name }} ({{ airport.iata }})
+              </mat-option>
+            </mat-autocomplete>
+            <mat-hint class="multi-dest-hint"
+              >Pick up to 3 destinations!</mat-hint
+            >
+          </mat-form-field>
+
+          <ng-template #single_destination>
+            <mat-form-field
+              *ngIf="isSingleDestination(); else combination"
+              class="form-field"
+              appearance="outline"
+            >
+              <mat-label>Destination</mat-label>
+              <input
+                #singleAirportInput
+                (input)="onInputChange($event)"
+                type="text"
+                placeholder="Full/Partial name"
+                matInput
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let airport of airports$ | async"
+                  [value]="airport.iata"
+                >
+                  {{ airport.name }} ({{ airport.iata }})
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </ng-template>
+
+          <ng-template #combination>
+            <div class="combination-input">
+              <div *ngFor="let row of rows; let i = index" class="row">
+                <mat-form-field
+                  style="margin-right: 20px"
+                  class="form-field"
+                  appearance="outline"
+                >
+                  <mat-label>Source</mat-label>
+                  <input
+                    #sourceCombinationInput
+                    (input)="onInputChange($event)"
+                    type="text"
+                    placeholder="Full/Partial name"
+                    matInput
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete
+                    autoActiveFirstOption
+                    #auto="matAutocomplete"
+                  >
+                    <mat-option
+                      *ngFor="let airport of airports$ | async"
+                      [value]="airport.iata"
+                    >
+                      {{ airport.name }} ({{ airport.iata }})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label>Destination</mat-label>
+                  <input
+                    #destinationCombinationInput
+                    (input)="onInputChange($event)"
+                    type="text"
+                    placeholder="Full/Partial name"
+                    matInput
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete
+                    autoActiveFirstOption
+                    #auto="matAutocomplete"
+                  >
+                    <mat-option
+                      *ngFor="let airport of airports$ | async"
+                      [value]="airport.iata"
+                    >
+                      {{ airport.name }} ({{ airport.iata }})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field
+                  style="margin-right: 20px"
+                  class="form-field"
+                  appearance="outline"
+                >
+                  <mat-label>Departure</mat-label>
+                  <input
+                    matInput
+                    #datesCombinationInput
+                    [matDatepicker]="picker"
+                    [min]="todayDate"
+                  />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="actions-div">
+                  <button
+                    class="btn-triprice"
+                    *ngIf="rows.length > 1"
+                    mat-icon-button
+                    (click)="removeRow(i)"
+                  >
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                  <button
+                    class="btn-triprice"
+                    *ngIf="i === rows.length - 1 && rows.length < 3"
+                    mat-icon-button
+                    (click)="addRow()"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-container *ngIf="isSingleDestination() || isMultiCity()">
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Dates</mat-label>
+              <mat-date-range-input
+                [formGroup]="range"
+                [rangePicker]="picker"
+                [min]="todayDate"
+              >
+                <input
+                  matStartDate
+                  formControlName="start"
+                  placeholder="Check-in"
+                />
+                <input
+                  matEndDate
+                  formControlName="end"
+                  placeholder="Check-out"
+                />
+              </mat-date-range-input>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+
+              <mat-error
+                *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+                >Invalid start date</mat-error
+              >
+              <mat-error
+                *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+                >Invalid end date</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field
+              class="form-field"
+              floatLabel="always"
+              appearance="outline"
+            >
+              <mat-label>Max flight price (€)</mat-label>
+              <input
+                matInput
+                type="number"
+                class="example-right-align"
+                placeholder="0"
+                [formControl]="maxPrice"
+              />
+            </mat-form-field>
+          </ng-container>
+
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Travelers</mat-label>
+            <input
+              type="number"
+              [min]="1"
+              class="form-control"
+              matInput
+              [formControl]="numberOfTravelersControl"
+              placeholder="amount"
+            />
+          </mat-form-field>
+          <div
+            class="hotel-included-wrapper"
+            matTooltip="Search with hotel"
+            matTooltipHideDelay="500"
+            matTooltipPosition="left"
+          >
+            <mat-checkbox
+              [(ngModel)]="searchForHotels"
+              [ngModelOptions]="{ standalone: true }"
+              color="primary"
+            >
+              <div class="hotel-section">
+                <mat-icon class="color-icon"> local_hotel</mat-icon>
+              </div>
+            </mat-checkbox>
+            <span class="hotel-included">{{
+              searchForHotels ? 'Hotel included' : 'Hotel is not included'
+            }}</span>
+          </div>
+          <div class="select-groups-wrapper">
+            <button
+              type="button"
+              class="selectButton btn-triprice editButton center lightblue"
+              (click)="openGroupsDialog()"
+              [ngClass]="{ selectedGroup: this.tripService.selectedGroup$ }"
+            >
+              {{
+                this.tripService.selectedGroup$
+                  ? 'Group: ' + this.tripService.selectedGroup$.name
+                  : 'Choose group'
+              }}
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- <button
+        [disabled]="disableButton()"
+        type="button"
+        class="select-button"
+        (click)="fetchFlights()"
+      >
+        Find Flights !<mat-icon>flight_takeoff</mat-icon>
+      </button> -->
+      <button
+        class="button btn-triprice"
+        id="button-7"
+        [disabled]="disableButton()"
+        (click)="fetchFlights()"
+      >
+        <div id="dub-arrow">
+          <img src="assets\images\plane-2.png" alt="" />
+        </div>
+        <span class="btn-find-flights">Find Flights</span>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #load>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</ng-template>

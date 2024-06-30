@@ -1,0 +1,35 @@
+<div *ngIf="loading; else trackingRows">
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</div>
+
+<ng-template #trackingRows>
+  <div class="text-header">Tracking my trip</div>
+  <div class="text-sub-header">Check if your expenses match for your planning</div>
+  <table mat-table [dataSource]="tripTrackRows" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> Category </th>
+      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="plannedCost">
+      <th mat-header-cell *matHeaderCellDef> Planned cost </th>
+      <td mat-cell *matCellDef="let element"> {{element.plannedCost}}€ </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="actualCost">
+      <th mat-header-cell *matHeaderCellDef> Actual cost </th>
+      <td mat-cell *matCellDef="let element"> {{element.actualCost}}€ </td>
+    </ng-container>
+
+    <ng-container matColumnDef="percentage">
+      <th mat-header-cell *matHeaderCellDef> percentage </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'warn': element.percentage > 100}"> {{element.percentage}}% </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-template>

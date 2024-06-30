@@ -1,0 +1,77 @@
+﻿<div class="title-wrapper">
+  <span class="title">Create your account</span>
+  <span>Already have an account? <a routerLink="/login">Log In</a></span>
+</div>
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name" id="first_name" />
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name" id="last_name" />
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phone_number" id="phone_number" />
+      <mat-error
+        *ngIf="
+          phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)
+        "
+        >Invalid phone number
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" id="email" />
+      <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        Invalid email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        id="password"
+      />
+      <mat-error
+        *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+      >
+        Password must be at least 6 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        placeholder="Confirm password"
+        formControlName="confirm_password"
+        type="password"
+      />
+      <mat-error
+        *ngIf="f.confirm_password.touched && f.confirm_password.invalid"
+      >
+        <span *ngIf="f.confirm_password.errors?.required">
+          Confirm Password is required.
+        </span>
+        <span *ngIf="f.confirm_password.errors?.confirmedValidator">
+          Password and Confirm Password must be match.
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <triprice-file-uploader (avatarUploaded)="onAvatarUpload($event)"></triprice-file-uploader>
+    <div class="submit-container">
+      <button [disabled]="loading" mat-raised-button color="primary">
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm mr-1"
+        ></span>
+        Register
+      </button>
+    </div>
+  </form>
+</div>

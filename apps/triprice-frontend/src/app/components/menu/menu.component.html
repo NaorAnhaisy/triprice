@@ -1,0 +1,52 @@
+<mat-toolbar [ngClass]="{'hide-toolbar': menuType !== 'loggedIn'}">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  <!-- <button *ngIf="menuType === 'loggedIn'" mat-button class="menu-button">
+    <mat-icon>person</mat-icon>
+  </button> -->
+
+  <!-- <div style="margin-top:7%; width:74%">
+    <triprice-stepper></triprice-stepper>
+  </div> -->
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img src="assets\logo.PNG" class="app-logo undragablle-image" />
+    <div *ngIf="menuType === 'loggedIn'">
+
+      <h4 class="name"><span>Welcome, </span><span>{{ userName }}</span></h4>
+      <img class="menu-profile-avatar-img undragablle-image" src="{{ userAvatar }}"
+        onerror="this.src='assets\\avatar.png'" alt="userAvatar" />
+      <mat-divider></mat-divider>
+    </div>
+    <button mat-button class="menu-button" (click)="changePage('search')">
+      <mat-icon>search</mat-icon>
+      <span>Search</span>
+    </button>
+    <button *ngIf="menuType === 'loggedIn'" mat-button class="menu-button" (click)="changePage('myTrips')">
+      <mat-icon>luggage</mat-icon>
+      <span>My Trips</span>
+    </button>
+    <button mat-button class="menu-button" (click)="changePage('blog')">
+      <mat-icon> list_alt </mat-icon>
+      <span>Blog</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" (click)="changePage('help')">
+      <mat-icon>help</mat-icon>
+      <span>Help</span>
+    </button>
+    <button *ngIf="menuType === 'loggedIn'" mat-button class="menu-button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

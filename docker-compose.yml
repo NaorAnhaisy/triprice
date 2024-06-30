@@ -1,0 +1,48 @@
+version: "3.8"
+
+networks:
+  corp:
+    driver: bridge
+
+services:
+  triprice-backend:
+    container_name: triprice-backend
+    build:
+      context: ./
+      cache_from:
+        - my-base-image:nx-base
+      dockerfile: ./apps/triprice-backend/Dockerfile
+      args:
+        NODE_ENV: "production"
+        BUILD_FLAG: ""
+    image: triprice-backend:nx-triprice-backend-prod
+    environment:
+      NODE_ENV: "production"
+      PORT: 3333
+    env_file:
+      - ./apps/triprice-backend/src/config/.env
+    networks:
+      - corp
+    restart: on-failure
+
+  triprice-frontend:
+    container_name: triprice-frontend
+    build:
+      context: ./
+      cache_from:
+        - nginx:1.19.2
+      dockerfile: ./apps/triprice-frontend/Dockerfile
+      args:
+        NODE_ENV: "production"
+        BUILD_FLAG: ""
+    image: triprice-frontend:nx-triprice-frontend-prod
+    ports:
+      - 443:443
+    environment:
+      NODE_ENV: "production"
+    networks:
+      - corp
+    restart: on-failure
+    volumes:
+      - ./apps/triprice-frontend/cs.crt:/etc/ssl/cs.crt
+      - ./apps/triprice-frontend/myserver.key:/etc/ssl/myserver.key

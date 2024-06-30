@@ -1,0 +1,200 @@
+.hotelCard {
+  background: #ffffff82;
+  backdrop-filter: blur(5px);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    box-shadow: none !important;
+    border: 1px solid #909090;
+    margin-top: 5%;
+    width: 85%;
+  }
+
+  .imgContainer {
+    flex: 0 0 auto;
+  }
+
+  .hotelImg {
+    border-radius: 10px;
+    display: block;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    max-width: 200px;
+    aspect-ratio: auto 200 / 200;
+    max-height: 170px;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    height: 180px;
+    width: 200px;
+}
+
+  .blueText {
+      color: rgb(18 118 211);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 15px 0px 0px;
+  }
+  
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flightSymbol {
+    position: relative;
+    display: block;
+    height: 0.125rem;
+    margin: 0.375rem auto;
+    padding: 0;
+    border-radius: 0.5rem;
+    background-color: #68697f;
+    line-height: 0;
+    text-align: center;
+  }
+  
+  .planeIcon {
+    position: absolute;
+    top: 50%;
+    right: -0.375rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    margin-top: -0.5rem;
+    padding-left: 0.25rem;
+    margin-left: 3px;
+  }
+  
+  .seperateLine {
+    max-width: 18%;
+    padding: 0 0.375rem;
+    flex: 0 1 36%;
+  }
+  
+  .middleContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 320px;
+  }
+  
+  .verticalLine {
+    height: auto;
+    border-right: 1px solid #909090;
+  }
+  
+  .mat-mdc-card-content:first-child {
+    padding-top: 0;
+  }
+  
+  .font20 {
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  .columnBox {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ltr {
+    direction: ltr;
+  }
+  
+  .lastSeats {
+    padding-bottom: 4%;
+    font-size: 12px;
+    color: #656668;
+  }
+  
+  .hour {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 4px;
+    color: #3a3a3a;
+  }
+  
+  .airportName {
+    font-size: 18px;
+    color: #656565;
+  }
+  
+  .margin1 {
+    margin: 1px;
+  }
+  
+  .innerPadding {
+    padding: 3% 0% 3% 0%;
+  }
+  
+  .bold {
+    font-weight: 500;
+  }
+  
+  .selectButton {
+    display: inline-block;
+    min-height: 2.25rem;
+    margin: 0;
+    padding: 0.375rem 1rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background-image: linear-gradient(-180deg, #00a698, #00a698);
+    background-image: linear-gradient(-180deg, var(--bpk-button-primary-gradient-start-color, #00a698), var(--bpk-button-primary-gradient-end-color, #00a698));
+    font-weight: 700;
+    line-height: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    color: #fff;
+    color: var(--bpk-button-primary-text-color, #fff);
+    background-color: #00a698;
+    background-color: var(--bpk-button-primary-background-color, #00a698);
+    font-size: 1.1875rem;
+    font-size: var(--bpk-button-font-size, 1.1875rem);
+  }
+  
+  .mt15 {
+    margin-top: 15%;
+  }
+  
+  .spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mt5{
+    margin-top: 5%;
+  }
+
+  .middle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ml5 {
+    margin-left: 5px;
+  }
+
+  .mr15 {
+    margin-right: 15px;
+  }
+
+  .pl15 {
+    padding-left: 15px;
+  }
+
+  .middleWidth {
+    width: 320px;
+    display: contents;
+  }

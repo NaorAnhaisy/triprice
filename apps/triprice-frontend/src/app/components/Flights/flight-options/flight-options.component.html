@@ -1,0 +1,29 @@
+<div *ngIf="loading; else showFlights" class="center">
+</div>
+<ng-template #showFlights>
+    <div class="filters">
+        <mat-card class="direct">
+            <mat-card-content>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="onlyDirectFlights" labelPosition='after'
+                        color="#00a698" (ngModelChange)="filterFlights()">
+                        Direct flights
+                    </mat-checkbox>
+                    <div class="max-price-container">
+                        <label id="example-name-label" class="example-name-label">Max price</label>
+                        <label class="example-value-label">{{maxPrice}}</label>
+                        <mat-slider min="0" max="20000" step="50" showTickMarks discrete>
+                            <input matSliderThumb [(ngModel)]="maxPrice" (ngModelChange)="filterFlights()">
+                        </mat-slider>
+                    </div>
+                </section>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div *ngFor="let flight of filteredFlights">
+        <div *ngIf="flight" class="mt2">
+            <triprice-flight-card [tripId]="tripId" [flight]="flight" [isOrderSummary]="false"></triprice-flight-card>
+        </div>
+
+    </div>
+</ng-template>

@@ -1,0 +1,83 @@
+<ng-container *ngIf="!loading; else load">
+<div class="row margin_top">
+  <div class="title">Tips & Tricks</div>
+  <div class="add_review" (click)="openDialog()">
+    <mat-icon class="add_icon">edit_note</mat-icon>
+  </div>
+</div>
+<div class="search-review">
+  <input
+    class="form-control"
+    type="text"
+    name="search"
+    [(ngModel)]="term"
+    autocomplete="off"
+    placeholder="Search"
+  />
+</div>
+<div class="reviews columnBox center">
+  <div *ngIf="loading">
+    <div class="loading-contianer">
+      <triprice-plane-loading></triprice-plane-loading>
+    </div> 
+  </div>
+  <!-- <div class="row"> -->
+  <!-- </div> -->
+  <div *ngFor="let review of reviews$ | async | filter : term">
+    <mat-card class="example-card">
+      <div class="buttons-review" *ngIf="review.user_id === currentUserId">
+        <button (click)="handleRemoveReview(review)" mat-mini-fab color="warn">
+          <mat-icon>close</mat-icon>
+        </button>
+        <div class="add_review" (click)="handleEditReview(review)">
+          <mat-icon class="add_icon">edit_note</mat-icon>
+        </div>
+      </div>
+      <mat-card-header>
+        <mat-card-title class="review-title">{{ review.title }} </mat-card-title>
+        <mat-card-subtitle class="review-subtitle"
+          >By {{ review.user?.first_name }}
+          {{ review.user?.last_name }}</mat-card-subtitle
+        >
+        <img
+          class="user_image"
+          mat-card-sm-image
+          src="{{ review.user?.avatar_url }}"
+        />
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row location-div">
+          <mat-icon class="location_icon">location_on</mat-icon>
+          <p class="city">{{ review.city_name }}</p>
+        </div>
+        <p class="review-description">{{ review.description }}</p>
+      </mat-card-content>
+      <div class="ratings">
+        <div class="rating-container">
+          <mat-label>Trip's rating </mat-label>
+          <star-rating
+            [starType]="'svg'"
+            [readOnly]="true"
+            [rating]="review.rating"
+          ></star-rating>
+        </div>
+
+        <div class="rating-container">
+          <mat-label>price's rating</mat-label>
+          <star-rating
+            [starType]="'svg'"
+            [readOnly]="true"
+            [rating]="review.price_rating"
+          ></star-rating>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+</ng-container>
+
+<ng-template #load>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</ng-template>

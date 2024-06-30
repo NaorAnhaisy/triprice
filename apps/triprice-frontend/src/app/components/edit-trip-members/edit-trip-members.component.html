@@ -1,0 +1,21 @@
+<ng-container *ngIf="!loading; else loading_trips">
+  <h1 mat-dialog-title>Trip members:</h1>
+  <div mat-dialog-content>
+      <div *ngFor="let user of users$" class="center">
+        <button class="removeButton" (click)="removeUserFromTrip(user)" mat-mini-fab color="warn">
+          <mat-icon>close</mat-icon>
+      </button>
+      <span>{{user.first_name}} {{user.last_name}}</span>
+      </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onDoneClick()">Done</button>
+  </div>
+</ng-container>
+
+<ng-template #loading_trips>
+  <div class="loading-contianer">
+    <triprice-plane-loading></triprice-plane-loading>
+  </div>
+</ng-template>

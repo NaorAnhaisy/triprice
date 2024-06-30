@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: calc(100%);
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~css-star-rating/css/star-rating.min.css';
+
+.success-snackbar .mdc-snackbar__surface {
+  background-color: #4caf50 !important;
+  /* Background color for success snackbar */
+  color: #ffffff;
+  /* Text color for success snackbar */
+}
+
+.error-snackbar .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+  /* Background color for error snackbar */
+  color: #ffffff;
+  /* Text color for error snackbar */
+}
+
+.undragablle-image {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 0.8em;
+  max-width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6f73f7;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c3c4ff;
+  border-radius: 10px;
+}
+
+.loading-contianer {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+triprice-confirm-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  .buttons-dialog {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
